@@ -47,7 +47,11 @@ class ProductController extends Controller
         'image'             => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $this->productId = Product::saveNewProduct($request);
+
+        $productId = Product::saveNewProduct($request);
+        $product = Product::find($productId);
+        $product->categories()->attach($request->category_ids);
+
         return back()->with('success', 'Product Created!');
     }
 
@@ -64,8 +68,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.product.edit',[
-            'categories' => Category::where('status',1)->get()
+        return view('admin.product.edit', [
+            'product' => $product,
+            'categories' => Category::where('status', 1)->get()
         ]);
     }
 
@@ -75,6 +80,9 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         Product::updateProduct($request,$product->id);
+            if ($request->has('category_ids')) {
+                    $product->categories()->sync($request->category_ids);
+            }
         return back()->with('success','Product Has Updated Successfully');
     }
 

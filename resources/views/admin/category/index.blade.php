@@ -43,6 +43,12 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endif
+                        @if(session('delete'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>{{ session('delete') }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
 
                         <div class="card">
                             <div class="card-body project-list-table-container">
@@ -80,8 +86,9 @@
                                                         <i class="fe fe-edit-2"></i>
                                                     </a>
                                                     <form action="{{route('category.destroy',$category->id)}}" method="POST">
+                                                        @method('DELETE')
                                                         @csrf
-                                                        <button type="submit" class="btn btn-sm btn-outline-secondary border me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+                                                        <button type="submit" class="btn btn-sm btn-outline-secondary border me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete" onclick="return confirm("Are You Sure ..")">
                                                             <i class="fe fe-trash-2"></i>
                                                         </button>
                                                     </form>

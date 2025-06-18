@@ -49,4 +49,9 @@ class Category extends Model
         }
         $category->delete();
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

@@ -76,8 +76,10 @@
                                                 <td>
                                                     <img src="{{asset($product->product_image)}}" alt="Image" width="50" height="50">
                                                 </td>
-                                                <td>
-                                                    <h6 class="mb-0 fs-14 fw-semibold">{{$product->category->name}}</h6>
+                                               <td>
+                                                    <h6 class="mb-0 fs-14 fw-semibold">
+                                                        {{ $product->categories->pluck('name')->join(', ') }}
+                                                    </h6>
                                                 </td>
                                                 <td>
                                                     <h6 class="mb-0 fs-14 fw-semibold">{{$product->name}}</h6>
@@ -88,8 +90,8 @@
                                                 </td>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 fs-14 fw-semibold ">Regular: {{$product->regular_price}}</h6>
-                                                    <h6 class="mb-0 fs-14 fw-semibold">Selling: {{$product->selling_price}}</h6>
+                                                    <h6 class="mb-0 fs-14 fw-semibold ">Regular Price: {{$product->regular_price}}</h6>
+                                                    <h6 class="mb-0 fs-14 fw-semibold">Selling Price: {{$product->selling_price}}</h6>
                                                 </td>
                                                 </td>
                                                 <td>
@@ -104,9 +106,6 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-stretch">
-                                                        <a class="btn btn-sm btn-outline-dark border me-2" href="{{route('product.show',$product->id)}}" data-bs-toggle="tooltip" >
-                                                            <i class="fe fe-eye"></i>
-                                                        </a>
                                                         <a class="btn btn-sm btn-outline-success border me-2" href="{{route('product.edit',$product->id)}}" data-bs-toggle="tooltip" data-bs-original-title="Edit">
                                                             <i class="fe fe-edit-2"></i>
                                                         </a>

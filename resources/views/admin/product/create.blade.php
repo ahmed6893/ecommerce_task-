@@ -11,13 +11,13 @@
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">Create Project</h1>
+                        <h1 class="page-title">Create Product</h1>
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">Apps</li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Projects</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Create Project</li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Product</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create Product</li>
                         </ol>
                     </div>
                 </div>
@@ -36,7 +36,6 @@
                         <div  class="card">
                             <div class="card-body p-5 create-project-main">
 
-                                <!-- Header Title + Right Side Button -->
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h4 class="m-0">All Products</h4>
                                     <a href="{{ route('product.index') }}" class="btn btn-sm btn-outline-secondary">
@@ -48,66 +47,14 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Category Name</label>
                                     <div class="col-sm-6">
-                                        <select class="form-control" name="category_id">
-                                            <option value="">--Select Category--</option>
+                                        <select class="form-control select2" name="category_ids[]" multiple data-placeholder="-- Select Categories --">
                                             @foreach ($categories as $category )
-                                                <option value="{{$category->id}}">{{ $category->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Sub Category Name</label>
-                                    <div class="col-sm-6">
-                                        <select class="form-control" name="sub_category_id">
-                                            <option value="">--Select Sub Category--</option>
-                                            @foreach ($subCategories as $subCategory )
-                                                <option value="{{$subCategory->id}}">{{ $subCategory->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Brand Name</label>
-                                    <div class="col-sm-6">
-                                        <select class="form-control" name="brand_id">
-                                            <option value="">--Select Brand--</option>
-                                            @foreach ($brands as $brand )
-                                                <option value="{{$brand->id}}">{{ $brand->name }}</option>
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Unit Name</label>
-                                    <div class="col-sm-6">
-                                        <select class="form-control" name="unit_id">
-                                            <option value="">--Select Unit--</option>
-                                            @foreach ($units as $unit )
-                                                <option value="{{$unit->id}}">{{ $unit->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Color</label>
-                                    <select class="form-control select2-show-search form-select" name="color[]" multiple="multiple" data-placeholder="Choose one" >
-                                        @foreach ($colors as $color )
-                                        <option value="{{$color->id}}">{{ $color->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Size</label>
-                                    <select class="form-control select2-show-search form-select" name="size[]" multiple="multiple" data-placeholder="Choose one">
-                                        @foreach ($sizes as $size )
-                                        <option value="{{$size->id}}">{{ $size->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                                 <div class="row g-3 mb-4">
                                     <div class="col-md-6">
                                         <label for="name" class="form-label fw-semibold text-dark">Product Name</label>
@@ -173,13 +120,6 @@
                                     <div class="col-md-6">
                                         <label class="form-label text-muted">Add Image:</label>
                                         <input type="file" class="dropify" data-bs-height="100" name="image" />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <label class="form-label text-muted">Add Extra Images:</label>
-                                        <input type="file" class="dropify" data-bs-height="100" name="other_images[]" multiple/>
                                     </div>
                                 </div>
 

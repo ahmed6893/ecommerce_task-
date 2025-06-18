@@ -22,6 +22,7 @@
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="{{asset('/')}}admin/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
+    <link href="{{ asset('/') }}admin/assets/plugins/select2/select2.min.css" rel="stylesheet" />
     <!-- STYLE CSS -->
     <link href="{{asset('/')}}admin/assets/css/style.css" rel="stylesheet" />
     <link href="{{asset('/')}}admin/assets/css/skin-modes.css" rel="stylesheet" />
@@ -75,6 +76,9 @@
 <script src="{{asset('/')}}admin/assets/plugins/bootstrap/js/popper.min.js"></script>
 <script src="{{asset('/')}}admin/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
+<!-- BOOTSTRAP MAX-LENGTH JS -->
+<script src="{{asset('/')}}admin/assets/plugins/bootstrap-maxlength/dist/bootstrap-maxlength.min.js"></script>
+
 <!-- SIDE-MENU JS -->
 <script src="{{asset('/')}}admin/assets/plugins/sidemenu/sidemenu.js"></script>
 
@@ -84,7 +88,7 @@
 
 <!-- STICKY JS -->
 <script src="{{asset('/')}}admin/assets/js/sticky.js"></script>
-
+<script src="{{asset('/')}}admin/assets/js/formelementadvnced.js"></script>
 
 <!-- APEXCHART JS -->
 <script src="{{asset('/')}}admin/assets/js/apexcharts.js"></script>
@@ -124,6 +128,31 @@
 <script src="{{asset('/')}}admin/assets/plugins/fileuploads/js/fileupload.js"></script>
 <script src="{{asset('/')}}admin/assets/plugins/fileuploads/js/file-upload.js"></script>
 
+<!--Internal Fancy uploader js-->
+<script src="{{asset('/')}}admin/assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
+<script src="{{asset('/')}}admin/assets/plugins/fancyuploder/jquery.fileupload.js"></script>
+<script src="{{asset('/')}}admin/assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
+<script src="{{asset('/')}}admin/assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
+<script src="{{asset('/')}}admin/assets/plugins/fancyuploder/fancy-uploader.js"></script>
+
+
+<!-- BOOTSTRAP MAX-LENGTH JS -->
+<script src="{{asset('/')}}admin/assets/plugins/bootstrap-maxlength/dist/bootstrap-maxlength.min.js"></script>
+
+<!-- bootstrap-datepicker js (Date picker Style-01) -->
+<script src="{{asset('/')}}admin/assets/plugins/bootstrap-datepicker/js/datepicker.js"></script>
+
+<!-- Amaze UI Date Picker js-->
+<script src="{{asset('/')}}admin/assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js"></script>
+
+<!-- Simple Date Time Picker js-->
+<script src="{{asset('/')}}admin/assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js"></script>
+
+<!-- Bootstrap-Date Range Picker js-->
+<script src="{{asset('/')}}admin/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+<!-- jQuery UI Date Picker js -->
+<script src="{{asset('/')}}admin/assets/plugins/date-picker/jquery-ui.js"></script>
 
 </body>
 

@@ -49,69 +49,15 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Category Name</label>
                                     <div class="col-sm-6">
-                                        <select class="form-control" name="category_id">
-                                            <option value="">--Select Category--</option>
-                                            @foreach ($categories as $category )
-                                                <option value="{{$category->id}}" @selected($category->id ==$product->category_id)>{{ $category->name }}</option>
+                                        <select class="form-control select2" name="category_ids[]" multiple data-placeholder="-- Select Categories --">
+                                           @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}"
+                                                    @if($product->categories->contains($category->id)) selected @endif>
+                                                    {{ $category->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Sub Category Name</label>
-                                    <div class="col-sm-6">
-                                        <select class="form-control" name="sub_category_id">
-                                            <option value="">--Select Sub Category--</option>
-                                            @foreach ($subCategories as $subCategory )
-                                                <option value="{{$subCategory->id}}" @selected($subCategory->id == $product->sub_category_id)>{{ $subCategory->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Brand Name</label>
-                                    <div class="col-sm-6">
-                                        <select class="form-control" name="brand_id">
-                                            <option value="">--Select Brand--</option>
-                                            @foreach ($brands as $brand )
-                                                <option value="{{$brand->id}}" @selected($brand->id == $product->brand_id)>{{ $brand->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Unit Name</label>
-                                    <div class="col-sm-6">
-                                        <select class="form-control" name="unit_id">
-                                            <option value="">--Select Unit--</option>
-                                            @foreach ($units as $unit )
-                                                <option value="{{$unit->id}}" @selected($brand->id == $product->brand_id)>{{ $unit->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Color</label>
-                                    <select class="form-control select2-show-search form-select" name="color[]" multiple="multiple" data-placeholder="Choose one" >
-                                        @foreach ($colors as $color )
-                                        <option value="{{$color->id}}" @foreach ($product->productColors as $productColor)
-                                            {{ $color->id == $productColor->color_id ? 'selected' : '' }}
-                                        @endforeach>{{ $color->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Size</label>
-                                    <select class="form-control select2-show-search form-select" name="size[]" multiple="multiple" data-placeholder="Choose one">
-                                        @foreach ($sizes as $size )
-                                        <option value="{{$size->id}}" @foreach ($product->productSizes as $productSize )
-                                            {{ $size->id == $productSize->size_id ? 'selected' : '' }}
-                                        @endforeach>{{ $size->name }}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                                 <div class="row g-3 mb-4">
                                     <div class="col-md-6">
@@ -176,22 +122,11 @@
 
                                         <div class="row mb-4">
                                             <div class="col-md-6">
-                                                <label class="form-label text-muted">Main Product Image:</label>
+                                                <label class="form-label text-muted">Product Image:</label>
                                                 <input type="file" name="image" class="dropify" data-bs-height="100" />
                                                 <img src="{{ asset($product->product_image) }}" width="100" class="mt-2 rounded" />
                                             </div>
                                         </div>
-
-                                        <div class="row mb-4">
-                                            <div class="col-md-6">
-                                                <label class="form-label text-muted">Extra Product Images:</label>
-                                                <input type="file" name="other_images[]" class="dropify" multiple />
-                                                <div class="mt-3 d-flex flex-wrap gap-2">
-                                                    @foreach ($product->productImages as $otherImage)
-                                                        <img src="{{ asset($otherImage->image) }}" width="70" height="70" class="rounded" />
-                                                    @endforeach
-                                                </div>
-                                            </div>
                                         </div>
 
                                   <!-- Buttons -->
