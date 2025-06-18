@@ -3,60 +3,50 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 
 class Category extends Model
 {
-    public static $category,$image,$imageName,$imageUrl,$directory,$extension;
+     protected $fillable = ['name', 'description', 'status', 'image'];
 
+
+     public static function getImageUrl($image)
+    {
+        $imageName = uniqid().'.'.$image->getClientOriginalExtension();
+        $directory = 'admin/images/category/';
+        $image->move(public_path($directory), $imageName);
+        return $directory . $imageName;
+    }
     public static function saveCategory($request)
     {
-        self::$category = new Category();
-        self::$category->name        = $request->name;
-        self::$category->description = $request->description;
-        self::$category->status      = $request->status;
-        self::$category->image       = self::getImageUrl($request);
-        self::$category->save();
-    }
-
-    public static function getImageUrl($request)
-    {
-        self::$image = $request->file('image');
-        self::$extension =self::$image->extension();
-        self::$imageName = rand(000,999).'.'.self::$extension;
-        self::$directory = 'admin/images/category/';
-        self::$imageUrl = self::$directory.self::$imageName;
-        self::$image->move(self::$directory,self::$imageName);
-        return self::$imageUrl;
+        $data = $request->only(['name', 'description', 'status']);
+        if ($request->hasFile('image')) {
+            $data['image'] = self::getImageUrl($request->file('image'));
+        }
+        self::create($data);
     }
 
     public static function updateCategory($request,$id)
     {
-        self::$category = Category::find($id);
-        self::$category->name = $request->name;
-        self::$category->description = $request->description;
-        self::$category->status      = $request->status;
-        if ($request->file('image'))
-        {
-            if (file_exists(self::$category->image))
-            {
-                unlink(self::$category->image);
+        $category = self::findOrFail($id);
+        $data = $request->only(['name', 'description', 'status']);
+
+        if ($request->hasFile('image')) {
+            if (File::exists(public_path($category->image))) {
+                File::delete(public_path($category->image));
             }
-            self::$imageUrl=self::getImageUrl($request);
-        }
-        else{
-            self::$imageUrl=self::$category->image;
+            $data['image'] = self::uploadImage($request->file('image'));
         }
 
-        self::$category->save();
+        $category->update($data);
     }
 
     public static function deleteCategory($id)
     {
-        self::$category = Category::find($id);
-        if (file_exists(self::$category->image))
-        {
-            unlink(self::$category->image);
+        $category = self::findOrFail($id);
+        if (File::exists(public_path($category->image))) {
+            File::delete(public_path($category->image));
         }
-        self::$category->delete();
+        $category->delete();
     }
 }

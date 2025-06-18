@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,7 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $product = Product::all();
+        return view('admin.product.index',['products'=>$product]);
     }
 
     /**
@@ -20,15 +22,33 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.product.create',[
+            'categories'=>Category::where('status',1)->get()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
+    public $productId ;
     public function store(Request $request)
     {
-        //
+        $request->validate([
+        'name'              => 'required|string|max:255',
+        'code'              => 'required|string|max:100|unique:products,code',
+        'meta_title'        => 'nullable|string|max:255',
+        'meta_description'  => 'nullable|string|max:500',
+        'regular_price'     => 'required|numeric|min:0',
+        'selling_price'     => 'required|numeric|min:0|lte:regular_price',
+        'stock_amount'      => 'required|integer|min:0',
+        'short_description' => 'nullable|string|max:255',
+        'long_description'  => 'nullable|string',
+        'status'            => 'required|boolean',
+        'image'             => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $this->productId = Product::saveNewProduct($request);
+        return back()->with('success', 'Product Created!');
     }
 
     /**
@@ -44,7 +64,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.product.edit',[
+            'categories' => Category::where('status',1)->get()
+        ]);
     }
 
     /**
@@ -52,7 +74,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        Product::updateProduct($request,$product->id);
+        return back()->with('success','Product Has Updated Successfully');
     }
 
     /**
@@ -60,6 +83,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        Product::destroy($product->id);
+        return back()->with('delete','Product Has Deleted');
     }
 }

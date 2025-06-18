@@ -29,6 +29,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+         $request->validate([
+        'name'        => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'status'      => 'required|boolean',
+        'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
         Category::saveCategory($request);
         return back()->with('success','Category Created');
     }
